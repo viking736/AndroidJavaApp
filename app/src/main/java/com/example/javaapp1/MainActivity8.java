@@ -18,18 +18,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class MainActivity8 extends AppCompatActivity {
-
     private EditText someText;
     private TextView tvTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main8);
-
         someText = (EditText) findViewById(R.id.edit);
         tvTxt = (TextView) findViewById(R.id.textView4);
     }
-
     public void read(View view){
         try {
             FileInputStream fileInput = openFileInput("Example.txt");
@@ -46,7 +43,6 @@ public class MainActivity8 extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     public void write(View view){
         String mytxt = someText.getText().toString();
@@ -54,7 +50,7 @@ public class MainActivity8 extends AppCompatActivity {
             FileOutputStream fileOutput = openFileOutput("Example.txt", MODE_PRIVATE);
             fileOutput.write(mytxt.getBytes());
             fileOutput.close();
-            Toast.makeText(MainActivity8.this, "Save successfull", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity8.this, "Save successful", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
