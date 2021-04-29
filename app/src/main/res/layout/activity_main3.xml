@@ -25,7 +25,7 @@
         android:layout_width="81dp"
         android:layout_height="41dp"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="344dp"
+        android:layout_marginBottom="448dp"
         android:hint="Value"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -39,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.09" />
 
     <Button
         android:id="@+id/setTextButton"
@@ -49,5 +49,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTextRt" />
+        app:layout_constraintTop_toBottomOf="@+id/etTextRt"
+        app:layout_constraintVertical_bias="0.088" />
 </androidx.constraintlayout.widget.ConstraintLayout>
