@@ -36,8 +36,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
+
     implementation 'com.google.firebase:firebase-auth:11.4.1'
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
     implementation 'com.firebaseui:firebase-ui:0.6.2'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-database:12.0.0'
+    implementation 'com.github.lguipeng:BubbleView:1.0.1'
+    implementation 'com.github.hani-momanii:SuperNova-Emoji:1.1'
 }
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'

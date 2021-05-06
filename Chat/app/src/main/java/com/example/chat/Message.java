@@ -7,7 +7,9 @@ public class Message {
     public String txtMsg;
     private long msgTime;
 
-    public Message(){ }
+    public Message(){
+
+    }
 
     public Message(String userName, String txtMsg){
         this.userName = userName;
