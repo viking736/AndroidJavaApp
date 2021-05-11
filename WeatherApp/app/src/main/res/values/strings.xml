@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="weatherApp">Weather App</string>
+    <string name="hint">Enter a town</string>
+    <string name="text">Press</string>
+    <string name="warning">Please enter something</string>
 </resources>
