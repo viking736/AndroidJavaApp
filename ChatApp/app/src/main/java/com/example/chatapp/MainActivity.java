@@ -1,9 +1,27 @@
-package com.example.chat;
+package com.example.chatapp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.github.library.bubbleview.BubbleTextView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.Nullable;
+
+import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         activity_main = findViewById(R.id.activity_main);
         submitButton = findViewById(R.id.submit_button);
-       emojiButton = findViewById(R.id.emoji_button);
+        emojiButton = findViewById(R.id.emoji_button);
         emojiconEditText = findViewById(R.id.textField);
-       emojIconActions = new EmojIconActions(getApplicationContext(), activity_main, emojiconEditText, emojiButton);
+        emojIconActions = new EmojIconActions(getApplicationContext(), activity_main, emojiconEditText, emojiButton);
         emojIconActions.ShowEmojIcon();
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,18 +62,18 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().getCurrentUser().getEmail(),
                         emojiconEditText.getText().toString()
                 ));
-                        emojiconEditText.setText(" ");
-           }
+                emojiconEditText.setText(" ");
+            }
         });
 
-       if(FirebaseAuth.getInstance().getCurrentUser() == null){
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
             startActivityForResult(AuthUI.getInstance()
-                   .createSignInIntentBuilder()
-                   .build(), SIGN_IN_CODE);
-       }else{
-           Snackbar.make(activity_main, "Already exists!!!", Snackbar.LENGTH_LONG).show();
-           displayAllMessages();
-       }
+                    .createSignInIntentBuilder()
+                    .build(), SIGN_IN_CODE);
+        }else{
+            Snackbar.make(activity_main, "Already exists!!!", Snackbar.LENGTH_LONG).show();
+            displayAllMessages();
+        }
     }
 
     private FirebaseListAdapter<Message> adapter;

@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
     implementation 'com.firebaseui:firebase-ui:0.6.2'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation 'com.google.firebase:firebase-database:20.0.0'
     implementation 'com.github.lguipeng:BubbleView:1.0.1'
     implementation 'com.github.hani-momanii:SuperNova-Emoji:1.1'
 }
