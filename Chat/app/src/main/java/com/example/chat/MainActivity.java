@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SIGN_IN_CODE){
             if(requestCode==RESULT_OK){
-                Snackbar.make(activity_main, "Allready existsss", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(activity_main, "Already exists", Snackbar.LENGTH_LONG).show();
                 displayAllMessages();
             }else{
-                Snackbar.make(activity_main, "Please signin first", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(activity_main, "Please sign in first", Snackbar.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     .createSignInIntentBuilder()
                     .build(), SIGN_IN_CODE);
         }else{
-            Snackbar.make(activity_main, "Allready exists!!!", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(activity_main, "Already exists!!!", Snackbar.LENGTH_LONG).show();
             displayAllMessages();
         }
     }
