@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .build(), SIGN_IN_CODE);
+                     displayAllMessages();
         }else{
             Snackbar.make(activity_main, "Already exists!!!", Snackbar.LENGTH_LONG).show();
             displayAllMessages();
