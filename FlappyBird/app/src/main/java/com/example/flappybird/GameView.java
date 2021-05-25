@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.Display;
@@ -40,6 +42,8 @@ public class GameView extends View {
     int[] tubeY = new int[numberOfTubes];
     Bitmap topTube, bottomTube;
     Random random;
+    int score = 0;
+    Paint scorePaint;
 
     int tubeVelocity = 8;
 
@@ -101,18 +105,36 @@ public class GameView extends View {
                 speed += gravity;
                 birdY += speed;
             }
+            for (int i = 0; i < numberOfTubes; i++ ){
+                tubeX[i] -= tubeVelocity;
+                canvas.drawBitmap(topTube, tubeX[i], tubeY[i] - topTube.getHeight(), null);
+                canvas.drawBitmap(bottomTube, tubeX[i], tubeY[i] + gap, null);
+
+                if (tubeX[i] == dWidth/3){
+                    score++;
+                }
+                if (tubeX[i] < birdX + birds[birdFrame].getWidth() && birdX < tubeX[i] + topTube.getWidth() &&
+                        birdY + birds[birdFrame].getHeight()*3 > tubeY[i] + bottomTube.getHeight()/2
+                        ||
+                        tubeX[i] < birdX + birds[birdFrame].getWidth() && birdX < tubeX[i] + topTube.getWidth() &&
+                        birdY + birds[birdFrame].getHeight()*1.8 < tubeY[i] + topTube.getHeight()/2 - gap
+                )
+                {
+                    gameState = false;
+                }
+            }
         }
 
-        for (int i = 0; i < numberOfTubes; i++ ){
-            tubeX[i] -= tubeVelocity;
-            canvas.drawBitmap(topTube, tubeX[i], tubeY[i] - topTube.getHeight(), null);
-            canvas.drawBitmap(bottomTube, tubeX[i], tubeY[i] + gap, null);
-        }
+        scorePaint = new Paint();
+        scorePaint.setColor(Color.WHITE);
+        scorePaint.setTextSize(80);
+        scorePaint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("Points: " +  score, 0, 110, scorePaint);
+
     }
     @Override
     public boolean onTouchEvent(MotionEvent event){
         int action = event.getAction();
-
         if (action == MotionEvent.ACTION_DOWN){
             speed = -30;
             gameState = true;
