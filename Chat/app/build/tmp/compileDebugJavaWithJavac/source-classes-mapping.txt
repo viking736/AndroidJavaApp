@@ -1,0 +1,8 @@
+com/example/chat/BuildConfig.java
+ com.example.chat.BuildConfig
+com/example/chat/Message.java
+ com.example.chat.Message
+com/example/chat/MainActivity.java
+ com.example.chat.MainActivity
+ com.example.chat.MainActivity$1
+ com.example.chat.MainActivity$2
