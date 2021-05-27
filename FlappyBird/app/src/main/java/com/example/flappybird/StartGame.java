@@ -13,6 +13,8 @@ public class StartGame extends Activity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameView = new GameView(this);
+
+        GameView.startGameContext = this;
         setContentView(gameView);
     }
 }

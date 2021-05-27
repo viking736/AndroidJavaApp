@@ -2,6 +2,7 @@ package com.example.flappybird;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -45,6 +46,9 @@ public class GameView extends View {
     int score = 0;
     Paint scorePaint;
 
+    static Sounds sounds;
+    static Context startGameContext;
+
     int tubeVelocity = 8;
 
 
@@ -84,6 +88,13 @@ public class GameView extends View {
             tubeY[i] = minTubeOffset + random.nextInt(maxTubeOffset - minTubeOffset);
         }
 
+        sounds = new Sounds(context);
+
+
+    }
+
+    public static Sounds getSounds(){
+        return sounds;
     }
 
     @Override
@@ -91,7 +102,6 @@ public class GameView extends View {
         super.onDraw(canvas);
         handler.postDelayed(runnable, UPDATE_SECONDS);
         canvas.drawBitmap(background, null, rect, null);
-//        canvas.drawBitmap(topTube, dWidth/2, dHeight/2, null);
         if (birdFrame == 0){
             birdFrame = 1;
         }else {
@@ -112,6 +122,7 @@ public class GameView extends View {
 
                 if (tubeX[i] == dWidth/3){
                     score++;
+                    GameView.getSounds().playPoint();
                 }
                 if (tubeX[i] < birdX + birds[birdFrame].getWidth() && birdX < tubeX[i] + topTube.getWidth() &&
                         birdY + birds[birdFrame].getHeight()*3 > tubeY[i] + bottomTube.getHeight()/2
@@ -120,9 +131,22 @@ public class GameView extends View {
                         birdY + birds[birdFrame].getHeight()*1.8 < tubeY[i] + topTube.getHeight()/2 - gap
                 )
                 {
+                    Context context = GameView.startGameContext;
+                    Intent intent = new Intent(context, GameOver.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                    GameView.getSounds().playHit();
                     gameState = false;
+
+
                 }
             }
+            if (gameState == true){
+                GameView.getSounds().playBackground();
+            }else {
+                GameView.getSounds().stopBackground();
+            }
+
         }
 
         scorePaint = new Paint();
@@ -138,6 +162,7 @@ public class GameView extends View {
         if (action == MotionEvent.ACTION_DOWN){
             speed = -30;
             gameState = true;
+            GameView.getSounds().playFly();
         }
         return true;
     }
