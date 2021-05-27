@@ -133,6 +133,7 @@ public class GameView extends View {
                 {
                     Context context = GameView.startGameContext;
                     Intent intent = new Intent(context, GameOver.class);
+                    intent.putExtra("Score", score);
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     GameView.getSounds().playHit();
