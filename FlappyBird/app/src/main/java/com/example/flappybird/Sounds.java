@@ -40,7 +40,7 @@ public class Sounds {
     }
     public void stopBackground(){
         if (background != null){
-            background.stop();
+            background.seekTo(73000);
         }
     }
 }
