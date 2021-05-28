@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import android.os.Handler;
+import android.widget.ToggleButton;
 
 import java.util.Random;
 
@@ -90,7 +91,6 @@ public class GameView extends View {
 
         sounds = new Sounds(context);
 
-
     }
 
     public static Sounds getSounds(){
@@ -142,11 +142,11 @@ public class GameView extends View {
 
                 }
             }
-            if (gameState == true){
-                GameView.getSounds().playBackground();
-            }else {
-                GameView.getSounds().stopBackground();
-            }
+//            if (gameState == true){
+//                GameView.getSounds().playBackground();
+//            }else {
+//                GameView.getSounds().stopBackground();
+//            }
 
         }
 

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,8 @@ public class GameOver extends AppCompatActivity {
 
     TextView gameScore;
     TextView gameBestScore;
+
+    ToggleButton toggleButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +36,18 @@ public class GameOver extends AppCompatActivity {
         gameBestScore = (TextView) findViewById(R.id.game_best_score);
         gameScore.setText(String.valueOf(score));
         gameBestScore.setText(String.valueOf(bestScore));
+        toggleButton = (ToggleButton) findViewById(R.id.toggle);
 
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toggleButton.isChecked()){
+                    GameView.getSounds().playBackground();
+                }else{
+                    GameView.getSounds().stopBackground();
+                }
+            }
+        });
 
     }
     public void restart(View view){

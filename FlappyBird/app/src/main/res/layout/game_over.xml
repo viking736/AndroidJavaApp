@@ -6,6 +6,17 @@
     android:background="@drawable/background"
     android:padding="10dp">
 
+    <ToggleButton
+        android:id="@+id/toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:drawableStart="@drawable/selector"
+        />
+
 
     <Button
         android:id="@+id/btn_restart"
