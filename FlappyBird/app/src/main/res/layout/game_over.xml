@@ -29,6 +29,16 @@
         android:backgroundTint="@color/teal_200"
         />
     <Button
+        android:id="@+id/btn_reset_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="Reset Score"
+        android:onClick="reset"
+        android:backgroundTint="@color/teal_200"
+        />
+    <Button
         android:id="@+id/btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

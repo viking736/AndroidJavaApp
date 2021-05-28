@@ -58,4 +58,9 @@ public class GameOver extends AppCompatActivity {
     public void exit(){
         finish();
     }
+
+    public void reset(View view){
+        SharedPreferences pref = getSharedPreferences("myPref", 0);
+        pref.edit().clear().commit();
+    }
 }
