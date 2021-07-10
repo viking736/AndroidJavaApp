@@ -12,6 +12,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class PaintingView extends View {
 
     private CustomPath drawPath;
@@ -21,6 +23,7 @@ public class PaintingView extends View {
     private float brushSize = 0f;
     private int color = Color.BLACK;
     private Canvas canvas;
+    private final ArrayList<CustomPath> paths = new ArrayList<>();
 
     public PaintingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -59,6 +62,12 @@ public class PaintingView extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(canvasBitmap, 0f, 0f, paint);
 
+        for (CustomPath path : paths){
+            paint.setStrokeWidth(path.brushThickness);
+            paint.setColor(path.colour);
+            canvas.drawPath(path, paint);
+        }
+
         if (drawPath != null){
             paint.setStrokeWidth(drawPath.brushThickness);
             paint.setColor(drawPath.colour);
@@ -88,6 +97,7 @@ public class PaintingView extends View {
 
                 break;
             case MotionEvent.ACTION_UP:
+                paths.add(drawPath);
 
                 drawPath = new CustomPath(color, brushSize);
 
