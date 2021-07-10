@@ -1,16 +1,20 @@
 package com.example.paintingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private PaintingView paintingView;
-    private ImageButton imageButton;
+    private ImageButton imageButton, imageButtonCurrentPaint;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imageButton = (ImageButton) findViewById(R.id.image_button);
         paintingView = (PaintingView) findViewById(R.id.painting_view);
+
+        linearLayout = (LinearLayout) findViewById(R.id.linear_layout_paint_colours);
+        imageButtonCurrentPaint = (ImageButton) linearLayout.findViewWithTag("@color/black");
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
