@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -108,5 +109,10 @@ public class PaintingView extends View {
         }
         invalidate();
         return true;
+    }
+
+    public void setSizeForBrush(float size){
+        brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources().getDisplayMetrics());
+        paint.setStrokeWidth(brushSize);
     }
 }
