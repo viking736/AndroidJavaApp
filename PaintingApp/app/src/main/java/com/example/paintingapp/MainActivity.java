@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PaintingView paintingView;
     private ImageButton imageButton, imageButtonCurrentPaint;
+
     private LinearLayout linearLayout;
 
     @Override
@@ -24,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
         paintingView = (PaintingView) findViewById(R.id.painting_view);
 
         linearLayout = (LinearLayout) findViewById(R.id.linear_layout_paint_colours);
-        imageButtonCurrentPaint = (ImageButton) linearLayout.findViewWithTag("@color/black");
+        imageButtonCurrentPaint = (ImageButton) linearLayout.getChildAt(1);
+
+        if (imageButtonCurrentPaint != null)
+        imageButtonCurrentPaint.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,R.drawable.pallet_selected));
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,5 +72,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         brushDialog.show();
+    }
+
+    public void palletClicked(View view){
+        if (view != imageButtonCurrentPaint){
+            ImageButton button = (ImageButton) view;
+            String colourTag = button.getTag().toString();
+            paintingView.setColour(colourTag);
+
+            button.setImageDrawable(ContextCompat.getDrawable( MainActivity.this,R.drawable.pallet_selected));
+
+            if (imageButtonCurrentPaint != null){
+                imageButtonCurrentPaint.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
+                        R.drawable.pallet));
+                imageButtonCurrentPaint = (ImageButton) view;
+            }
+        }
     }
 }

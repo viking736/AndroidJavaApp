@@ -115,4 +115,9 @@ public class PaintingView extends View {
         brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources().getDisplayMetrics());
         paint.setStrokeWidth(brushSize);
     }
+
+    public void setColour(String colour){
+        color = Color.parseColor(colour);
+        paint.setColor(color);
+    }
 }
