@@ -5,18 +5,29 @@ import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private PaintingView paintingView;
     private ImageButton imageButton, imageButtonCurrentPaint;
 
     private LinearLayout linearLayout;
+
+    private SensorManager sensorManager;
+    private boolean isDefaultColor = false;
+    private long lastUpdate;
+    private boolean hasFlash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imageButton = (ImageButton) findViewById(R.id.image_button);
         paintingView = (PaintingView) findViewById(R.id.painting_view);
+        paintingView.setBackgroundColor(Color.WHITE);
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        lastUpdate = System.currentTimeMillis();
 
         linearLayout = (LinearLayout) findViewById(R.id.linear_layout_paint_colours);
         imageButtonCurrentPaint = (ImageButton) linearLayout.getChildAt(1);
@@ -88,5 +102,49 @@ public class MainActivity extends AppCompatActivity {
                 imageButtonCurrentPaint = (ImageButton) view;
             }
         }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            getAccelerometer(event);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    public void getAccelerometer(SensorEvent event){
+        float[] values = event.values;
+
+        float x = values[0];
+        float y = values[1];
+        float z = values[2];
+
+        float accelerationSquareRoot = (float) ((x*x+y*y+z*z)/(Math.pow(SensorManager.GRAVITY_EARTH, 2)));
+        long actualTime = System.currentTimeMillis();
+
+        if (accelerationSquareRoot >= 2){
+            if (actualTime - lastUpdate < 200){
+                return;
+            }
+            lastUpdate = actualTime;
+            if (isDefaultColor){
+                hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+                paintingView.setBackgroundColor(Color.WHITE);
+            }else{
+                paintingView.setBackgroundColor(Color.BLACK);
+            }
+            isDefaultColor = !isDefaultColor;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(MainActivity.this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
