@@ -7,6 +7,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         imageButtonCurrentPaint = (ImageButton) linearLayout.getChildAt(1);
 
         if (imageButtonCurrentPaint != null)
-        imageButtonCurrentPaint.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,R.drawable.pallet_selected));
+            imageButtonCurrentPaint.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.pallet_selected));
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
     }
-    private void showBrushSize(){
+
+    private void showBrushSize() {
         Dialog brushDialog = new Dialog(this);
         brushDialog.setContentView(R.layout.dialog_brush_size);
         brushDialog.setTitle("Brush size: ");
@@ -88,15 +91,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         brushDialog.show();
     }
 
-    public void palletClicked(View view){
-        if (view != imageButtonCurrentPaint){
+    public void palletClicked(View view) {
+        if (view != imageButtonCurrentPaint) {
             ImageButton button = (ImageButton) view;
             String colourTag = button.getTag().toString();
             paintingView.setColour(colourTag);
 
-            button.setImageDrawable(ContextCompat.getDrawable( MainActivity.this,R.drawable.pallet_selected));
+            button.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.pallet_selected));
 
-            if (imageButtonCurrentPaint != null){
+            if (imageButtonCurrentPaint != null) {
                 imageButtonCurrentPaint.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
                         R.drawable.pallet));
                 imageButtonCurrentPaint = (ImageButton) view;
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             getAccelerometer(event);
         }
     }
@@ -116,25 +119,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void getAccelerometer(SensorEvent event){
+    public void getAccelerometer(SensorEvent event) {
         float[] values = event.values;
 
         float x = values[0];
         float y = values[1];
         float z = values[2];
 
-        float accelerationSquareRoot = (float) ((x*x+y*y+z*z)/(Math.pow(SensorManager.GRAVITY_EARTH, 2)));
+        float accelerationSquareRoot = (float) ((x * x + y * y + z * z) / (Math.pow(SensorManager.GRAVITY_EARTH, 2)));
         long actualTime = System.currentTimeMillis();
 
-        if (accelerationSquareRoot >= 2){
-            if (actualTime - lastUpdate < 200){
+        if (accelerationSquareRoot >= 2) {
+            if (actualTime - lastUpdate < 200) {
                 return;
             }
             lastUpdate = actualTime;
-            if (isDefaultColor){
+            if (isDefaultColor) {
                 hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
                 paintingView.setBackgroundColor(Color.WHITE);
-            }else{
+            } else {
                 paintingView.setBackgroundColor(Color.BLACK);
             }
             isDefaultColor = !isDefaultColor;

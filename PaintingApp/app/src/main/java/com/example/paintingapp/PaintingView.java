@@ -6,8 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -25,6 +28,7 @@ public class PaintingView extends View {
     private int color = Color.BLACK;
     private Canvas canvas;
     private final ArrayList<CustomPath> paths = new ArrayList<>();
+    private boolean isEraser = false;
 
     public PaintingView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -34,13 +38,14 @@ public class PaintingView extends View {
     public static class CustomPath extends Path {
         private int colour;
         private float brushThickness;
-        public CustomPath(int colour, float brushThickness){
+
+        public CustomPath(int colour, float brushThickness) {
             this.colour = colour;
             this.brushThickness = brushThickness;
         }
     }
 
-    public void setUpDrawing(){
+    public void setUpDrawing() {
         paint = new Paint();
         drawPath = new CustomPath(color, brushSize);
         paint.setColor(color);
@@ -63,13 +68,13 @@ public class PaintingView extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(canvasBitmap, 0f, 0f, paint);
 
-        for (CustomPath path : paths){
+        for (CustomPath path : paths) {
             paint.setStrokeWidth(path.brushThickness);
             paint.setColor(path.colour);
             canvas.drawPath(path, paint);
         }
 
-        if (drawPath != null){
+        if (drawPath != null) {
             paint.setStrokeWidth(drawPath.brushThickness);
             paint.setColor(drawPath.colour);
             canvas.drawPath(drawPath, paint);
@@ -82,7 +87,7 @@ public class PaintingView extends View {
         float x = event.getX();
         float y = event.getY();
 
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
                 drawPath.colour = color;
@@ -111,12 +116,12 @@ public class PaintingView extends View {
         return true;
     }
 
-    public void setSizeForBrush(float size){
+    public void setSizeForBrush(float size) {
         brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources().getDisplayMetrics());
         paint.setStrokeWidth(brushSize);
     }
 
-    public void setColour(String colour){
+    public void setColour(String colour) {
         color = Color.parseColor(colour);
         paint.setColor(color);
     }
