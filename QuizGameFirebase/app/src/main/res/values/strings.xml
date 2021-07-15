@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quiz Game Firebase</string>
+    <string name="account">Do not have an account? <font color='#5B39C6'>Sign Up</font></string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
 </resources>
