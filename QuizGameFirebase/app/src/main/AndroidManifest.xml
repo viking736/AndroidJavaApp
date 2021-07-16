@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizGameFirebase">
+        <activity android:name=".QuizActivity"></activity>
         <activity
             android:name=".ForgotPasswordActivity"
             android:parentActivityName=".LogInActivity"
-            android:theme="@style/Theme.LogIn"></activity>
+            android:theme="@style/Theme.LogIn" />
         <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LogInActivity"
@@ -37,7 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

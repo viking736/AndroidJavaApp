@@ -65,7 +65,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 Toast.makeText(LogInActivity.this, "Enter your email and password first",
                         Toast.LENGTH_SHORT).show();
-                
+
             }
 
 
