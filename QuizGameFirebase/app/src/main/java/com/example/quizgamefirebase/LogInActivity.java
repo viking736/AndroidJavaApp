@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -45,7 +46,7 @@ public class LogInActivity extends AppCompatActivity {
             String userPassword = editTextPassword.getText().toString();
 
             signInFirebase(userEmail, userPassword);
-            
+
         });
 
         signInButtonGoogle.setOnClickListener(view -> {
@@ -82,6 +83,20 @@ public class LogInActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user != null){
+
+            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
     }
 }
