@@ -60,6 +60,9 @@ public class LogInActivity extends AppCompatActivity {
 
         textViewForgetPassword.setOnClickListener(view -> {
 
+            Intent intent = new Intent(LogInActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+
         });
     }
 

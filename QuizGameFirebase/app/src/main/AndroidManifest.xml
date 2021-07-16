@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizGameFirebase">
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ForgotPasswordActivity"
             android:parentActivityName=".LogInActivity"
             android:theme="@style/Theme.LogIn"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:parentActivityName=".LogInActivity"
+            android:theme="@style/Theme.LogIn" />
         <activity
             android:name=".LogInActivity"
             android:theme="@style/Theme.LogIn">
