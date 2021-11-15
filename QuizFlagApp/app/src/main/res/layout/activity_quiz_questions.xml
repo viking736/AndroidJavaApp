@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,9 +9,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="15dp">
 
         <TextView
@@ -20,37 +20,36 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="25sp"
             android:text="What country does this flag belong to?"
-            />
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/iv_image_country"
             android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_height="140dp"
             android:layout_marginTop="15dp"
-            android:src="@drawable/norway"/>
+            android:src="@drawable/norway" />
 
         <LinearLayout
             android:id="@+id/ll_progress_bar_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <ProgressBar
                 android:id="@+id/progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:indeterminate="false"
                 android:max="10"
                 android:minHeight="50dp"
                 android:progress="0"
-                android:indeterminate="false"
-                tools:ignore="Suspicious0dp"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+                tools:ignore="Suspicious0dp" />
 
             <TextView
                 android:id="@+id/tv_progress"
@@ -58,9 +57,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="15dp"
+                android:text="0/10"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp"
-                android:text="0/10"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -69,60 +68,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:background="@drawable/drawable_resource_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
             android:text="A random text"
-            android:background="@drawable/drawable_resource_option_border"/>
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_option_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:background="@drawable/drawable_resource_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
             android:text="A random text"
-            android:background="@drawable/drawable_resource_option_border"/>
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_option_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:background="@drawable/drawable_resource_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
             android:text="A random text"
-            android:background="@drawable/drawable_resource_option_border"/>
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_option_four"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:background="@drawable/drawable_resource_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
             android:text="A random text"
-            android:background="@drawable/drawable_resource_option_border"/>
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SUBMIT"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
             android:background="@color/teal_700"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
+            android:text="SUBMIT"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
